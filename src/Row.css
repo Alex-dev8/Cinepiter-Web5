@@ -3,18 +3,38 @@
     color: white;
 }
 
+.poster {
+   position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    z-index: 1;
+    transition: transform 250ms, box-shadow 250ms;
+    box-shadow: 1px 3px 10px rgba(0, 0, 0, 1);
+    border-radius: 50%;
+}
+
 .row_poster {
     object-fit: contain;
-    width: 100%;
-    max-height: 150px;
+    max-height: 300px;
     margin-right: 10px;
     transition: transform 250ms;
 }
 
-.row_poster:hover {
-    transform: scale(1.08);    
-}
-
+.poster:hover .row_poster  {
+    transform: scale(1.08);
+    cursor: pointer;
+  }
+  
+  .poster:hover .overlay {
+    transform: scale(2);
+    cursor: pointer;
+  }
+  
 .row_posters {
     display: flex;
     overflow-y: hidden;
@@ -24,12 +44,4 @@
 
 .row_posters::-webkit-scrollbar {
     display: none;
-}
-
-.row_posterLarge {
-    max-height: 300px;
-}
-
-.row_posterLarge:hover {
-    transform: scale(1.09);    
 }
