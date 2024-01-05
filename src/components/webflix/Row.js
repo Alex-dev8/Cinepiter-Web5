@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "./axios";
+import axios from "../../axios";
 import "./Row.css";
 import { IoFlash, IoFlashOutline } from "react-icons/io5";
-import { CinepiterContext } from "./context/CinepiterContext";
+import { CinepiterContext } from "../../context/CinepiterContext";
 
 function Row({ title, fetchUrl }) {
   const BASE_URL = "https://image.tmdb.org/t/p/original/";

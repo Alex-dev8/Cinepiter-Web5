@@ -1,0 +1,35 @@
+.header {
+    width: 100%;
+    height: auto;
+    padding-left: 90px;
+    padding-right: 90px;
+    display: flex;
+}
+
+.logo {
+    width: 206px;
+    height: 55px;
+    margin-top: 58px;
+}
+
+.link_container {
+    display: flex;
+    position: absolute;
+    top: 68px;
+    right: 90px;
+    gap: 50px
+}
+
+.link {
+    color: #ededed60;
+    transition: transform 250ms;
+}
+
+.link:hover {
+    transform: scale(1.06);
+}
+
+.custom_link {
+    color: #ededed60;
+    transition: transform 250ms;
+}

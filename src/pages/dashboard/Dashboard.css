@@ -1,0 +1,19 @@
+.title_text {
+    color: #05DB8B;
+    font-size: 75px;
+}
+
+.title_container_dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    gap: 5vh;
+}
+
+.logos_container {
+    display: flex;
+    gap: 20vh;
+    align-items: center;
+}

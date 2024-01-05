@@ -16,7 +16,7 @@ export const CinepiterProvider = ({ children }) => {
         setWeb5(web5);
         setUser(did);
       } catch (err) {
-        console.error(err);
+        console.error("error starting did", err);
       }
     };
     initWeb5();

@@ -28,12 +28,12 @@
 .poster:hover .row_poster  {
     transform: scale(1.08);
     cursor: pointer;
-  }
+}
   
-  .poster:hover .overlay {
-    transform: scale(2);
-    cursor: pointer;
-  }
+.poster:hover .overlay {
+transform: scale(2);
+cursor: pointer;
+}
   
 .row_posters {
     display: flex;
