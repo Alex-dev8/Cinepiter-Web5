@@ -10,11 +10,11 @@ const requests = {
   fetchHorrorMovies: "/discover/movie?with_genres=27",
   fetchRomanceMovies: "/discover/movie?with_genres=10749",
   fetchDocumentaries: "/discover/movie?with_genres=99",
-  fetchSimilarMovies: (movie_id) => {
-    return `/movie/${movie_id}/similar`;
-  },
   fetchMovieGenres: "/genre/movie/list",
-  fetchTvGenres: "/genre/tv/list"
+  fetchTvGenres: "/genre/tv/list",
+  fetchRecommendedMovies: (movie_id) => {
+    return `/movie/${movie_id}/recommendations`;
+  },
 };
 
 export default requests;

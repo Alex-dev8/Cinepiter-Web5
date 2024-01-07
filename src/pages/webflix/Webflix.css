@@ -1,7 +1,17 @@
 * {
   margin: 0;
+  background-color: #111;
+  /* margin-top: 20px; */
 }
 
-.webflix {
-  background-color: #111;
+.webflix_header {
+  width: 30vh;
+  padding: 20px
+}
+
+.webflix_header_container {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }

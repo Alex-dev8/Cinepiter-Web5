@@ -1,21 +1,26 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "../../axios";
 import "./Row.css";
-import { IoFlash, IoFlashOutline } from "react-icons/io5";
 import { CinepiterContext } from "../../context/CinepiterContext";
 
-function Row({ title, fetchUrl }) {
+function Row({ title, fetchUrl, recommended = false }) {
   const BASE_URL = "https://image.tmdb.org/t/p/original/";
   const [movies, setMovies] = useState([]);
-  const { favourites, updateFavourites } = useContext(CinepiterContext);
+  const { favourites, updateFavourites, recommendedMovies } =
+    useContext(CinepiterContext);
 
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(fetchUrl);
       setMovies(request.data.results);
     }
-    fetchData();
-  }, [fetchUrl]);
+
+    if (!recommended) {
+      fetchData();
+    } else {
+      setMovies(recommendedMovies);
+    }
+  }, [fetchUrl, recommended, recommendedMovies]);
 
   return (
     <div className="row">
@@ -28,9 +33,17 @@ function Row({ title, fetchUrl }) {
             onClick={() => updateFavourites(movie)}
           >
             {favourites.some((fav) => fav.id === movie.id) ? (
-              <IoFlash className="overlay" />
+              <img
+                src={require("../../assets/thunder-green.png")}
+                alt=""
+                className="overlay"
+              />
             ) : (
-              <IoFlashOutline className="overlay" />
+              <img
+                src={require("../../assets/thunder-black.png")}
+                alt=""
+                className="overlay"
+              />
             )}
             <img
               key={movie.id}

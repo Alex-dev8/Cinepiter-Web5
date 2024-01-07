@@ -13,6 +13,7 @@ export const CinepiterProvider = ({ children }) => {
   const [allGenres, setAllGenres] = useState([]);
   const [favouriteGenreNames, setFavouriteGenreNames] = useState([]);
   const [algorithmStats, setAlgorithmStats] = useState([]);
+  const [recommendedMovies, setRecommendedMovies] = useState([]);
 
   useEffect(() => {
     const initWeb5 = async () => {
@@ -45,6 +46,12 @@ export const CinepiterProvider = ({ children }) => {
       statisticsAlgorithm();
     }
   }, [favouriteGenreNames]);
+
+  useEffect(() => {
+    if (algorithmStats.length > 0) {
+      getRecommendedMovies();
+    }
+  }, [algorithmStats]);
 
   async function loadFavourites() {
     const { records } = await web5.dwn.records.query({
@@ -79,7 +86,7 @@ export const CinepiterProvider = ({ children }) => {
   }
 
   async function saveFavourite(movie) {
-    const { id, original_title: title, genre_ids: genres } = movie;
+    const { id, title, genre_ids: genres } = movie;
     const movieData = {
       id,
       title,
@@ -113,7 +120,11 @@ export const CinepiterProvider = ({ children }) => {
       const _movieGenres = movieGenres.data.genres;
       const _tvGenres = tvGenres.data.genres;
       const genreArray = [..._movieGenres, ..._tvGenres];
-      setAllGenres(genreArray);
+      const uniqueArray = genreArray.filter(
+        (value, index, self) =>
+          self.findIndex((obj) => obj.id === value.id) === index
+      );
+      setAllGenres(uniqueArray);
     } catch (err) {
       console.error("Error fetching genres", err);
     }
@@ -122,7 +133,6 @@ export const CinepiterProvider = ({ children }) => {
   async function getFavouriteGenres() {
     const favNames = [];
     const genreIds = favourites.map((movie) => movie.genres).flat();
-
     const matchingGenres = genreIds.map((genre) => {
       return allGenres.find((item) => item.id === genre);
     });
@@ -153,7 +163,52 @@ export const CinepiterProvider = ({ children }) => {
     setAlgorithmStats(genreArray);
   }
 
-  const value = { user, favourites, updateFavourites, algorithmStats };
+  function shuffleMovies(movies) {
+    for (let i = movies.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [movies[i], movies[j]] = [movies[j], movies[i]];
+    }
+  }
+
+  async function getRecommendedMovies() {
+    const sortedGenres = algorithmStats.sort((a, b) => b.count - a.count);
+    const topGenres = sortedGenres.slice(0, 5);
+    const _topGenres = topGenres
+      .map((topGenre) =>
+        allGenres.find((genre) => genre.name === topGenre.genre)
+      )
+      .filter((genre) => genre)
+      .map((genre) => genre.id);
+    const filteredFavorites = favourites.filter((favourite) =>
+      favourite.genres.every((genreId) => _topGenres.includes(genreId))
+    );
+    let _recommendedMovies = [];
+    for (const favourite of filteredFavorites) {
+      const id = favourite.id.toString();
+      try {
+        const response = await axios.get(requests.fetchRecommendedMovies(id));
+        const data = response.data.results;
+        if (data.length > 0) {
+          _recommendedMovies = _recommendedMovies.concat(data);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+      shuffleMovies(_recommendedMovies);
+      const randomRecommendedMovies = _recommendedMovies.splice(0, 25);
+      setRecommendedMovies(randomRecommendedMovies);
+    }
+  }
+
+  const value = {
+    user,
+    favourites,
+    updateFavourites,
+    algorithmStats,
+    allGenres,
+    recommendedMovies,
+    getRecommendedMovies,
+  };
   return (
     <CinepiterContext.Provider value={value}>
       {children}

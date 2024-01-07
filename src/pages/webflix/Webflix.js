@@ -1,12 +1,19 @@
 import "./Webflix.css";
 import Row from "../../components/webflix/Row";
-import Banner from "../../components/webflix/Banner";
 import requests from "../../requests";
 
 function Webflix() {
   return (
-    <div className="webflix">
-      {/* <Banner /> */}
+    <div>
+      <div className="webflix_header_container">
+        <img
+          src={require("../../assets/webflix-logo.png")}
+          alt=""
+          className="webflix_header"
+        />
+      </div>
+
+      <Row title="RECOMMENDED FOR YOU" recommended />
       <Row
         title="WEBFLIX ORIGINALS"
         fetchUrl={requests.fetchNetflixOriginalMovies}
