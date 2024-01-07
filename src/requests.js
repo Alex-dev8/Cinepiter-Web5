@@ -13,6 +13,8 @@ const requests = {
   fetchSimilarMovies: (movie_id) => {
     return `/movie/${movie_id}/similar`;
   },
+  fetchMovieGenres: "/genre/movie/list",
+  fetchTvGenres: "/genre/tv/list"
 };
 
 export default requests;

@@ -6,54 +6,25 @@ import {
   RadarChart,
   PolarGrid,
   PolarAngleAxis,
-  PolarRadiusAxis,
   ResponsiveContainer,
 } from "recharts";
+import { useContext } from "react";
+import { CinepiterContext } from "../../context/CinepiterContext";
 
 function Dashboard() {
-  const DATA = [
-    {
-      genre: "Comedy",
-      A: 120,
-      B: 100,
-      max: 150,
-    },
-    {
-      genre: "Action",
-      A: 86,
-      B: 82,
-      max: 150,
-    },
-    {
-      genre: "Romance",
-      A: 102,
-      B: 72,
-      max: 150,
-    },
-    {
-      genre: "Musical",
-      A: 104,
-      B: 99,
-      max: 150,
-    },
-    {
-      genre: "Drama",
-      A: 150,
-      B: 150,
-      max: 150,
-    },
-  ];
+  const { algorithmStats } = useContext(CinepiterContext);
+  
   return (
     <div>
       <Header />
       <div className="title_container_dashboard">
         <h1 className="title_text">DASHBOARD</h1>
         <ResponsiveContainer width="100%" height="100%">
-          <RadarChart cx="50%" cy="50%" outerRadius="80%" data={DATA}>
+          <RadarChart cx="50%" cy="50%" outerRadius="80%" data={algorithmStats}>
             <PolarGrid />
             <PolarAngleAxis dataKey="genre" />
             <Radar
-              dataKey="A"
+              dataKey="count"
               stroke="#05DB8B"
               fill="#05DB8B"
               fillOpacity={0.9}

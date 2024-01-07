@@ -6,7 +6,7 @@ import requests from "../../requests";
 function Webflix() {
   return (
     <div className="webflix">
-      <Banner />
+      {/* <Banner /> */}
       <Row
         title="WEBFLIX ORIGINALS"
         fetchUrl={requests.fetchNetflixOriginalMovies}
