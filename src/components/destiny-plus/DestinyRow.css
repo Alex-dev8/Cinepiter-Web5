@@ -26,7 +26,7 @@
     border-radius: 30%;
 }
 
-.poster:hover .row_poster  {
+.poster:hover .destiny_row_poster  {
     transform: scale(1.08);
     cursor: pointer;
 }
