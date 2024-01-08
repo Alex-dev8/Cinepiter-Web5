@@ -23,8 +23,8 @@
     height: 107px;
     width: 260px;
     font-size: 60px;
-    font-weight: 600;
     transition: transform 250ms;
+    font-family: Koulen;
 }
 
 .button:hover {
@@ -34,4 +34,6 @@
 
 .text_subtitle {
     color: #ededed60;
+    font-family: Inria Sans;
+    text-align: center;
 }

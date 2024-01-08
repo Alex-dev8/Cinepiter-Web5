@@ -1,6 +1,8 @@
 .title_text {
     color: #05DB8B;
     font-size: 75px;
+    font-family: Koulen;
+    letter-spacing: 0.05cap;
 }
 
 .title_container_dashboard {
@@ -16,4 +18,12 @@
     display: flex;
     gap: 20vh;
     align-items: center;
+}
+
+.movie_service_buttons {
+    transition: transform 250ms;
+}
+
+.movie_service_buttons:hover {
+    transform: scale(1.08);
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "../../axios";
-import "./WebflixRow.css";
+import "./DestinyRow.css";
 import { CinepiterContext } from "../../context/CinepiterContext";
 
 function Row({ title, fetchUrl, recommended = false }) {
@@ -47,7 +47,7 @@ function Row({ title, fetchUrl, recommended = false }) {
             )}
             <img
               key={movie.id}
-              className="row_poster"
+              className="destiny_row_poster"
               src={`${BASE_URL}${movie.poster_path}`}
               alt={movie.name}
             />

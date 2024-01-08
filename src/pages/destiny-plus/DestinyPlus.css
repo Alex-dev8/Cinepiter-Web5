@@ -1,0 +1,17 @@
+.destiny_container {
+    background-color: darkblue;
+}
+
+.destiny_header {
+  width: 30vh;
+  padding: 20px;
+  background-color: darkblue;
+}
+
+.destiny_header_container {
+  width: 100%;
+  background-color: darkblue;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}

@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 
 function Welcome() {
   return (
-    <div>
+    <div className="welcome_container">
       <Header />
       <div className="title_container">
         <img
@@ -15,8 +15,12 @@ function Welcome() {
         <Link to={"/dashboard"}>
           <button className="button">Enter</button>
         </Link>
-        <h2 className="text_subtitle">Connect to different movie platforms using a single DID.
-        Share your watching preferences with a single like.
+        <h2 className="text_subtitle">
+          <p>Connect to different movie platforms using a single DID.</p>
+          <p>
+            Click on movies and TV shows that you like, and watch your algorithm
+            learn and grow in real time across multiple platforms.
+          </p>
         </h2>
       </div>
     </div>

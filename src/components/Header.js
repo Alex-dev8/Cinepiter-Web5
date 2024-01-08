@@ -1,6 +1,18 @@
-import "./Header.css"
+import "./Header.css";
 
 function Header() {
+  function handleEmailClick() {
+    const emailAddress = "cansal89@gmail.com";
+    const subject = "Info regarding Cinepiter Web5";
+    const body = "";
+
+    const mailtoUrl = `mailto:${emailAddress}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoUrl;
+  }
+
   return (
     <header className="header">
       <div>
@@ -12,21 +24,16 @@ function Header() {
       </div>
       <div className="link_container">
         <a
-          href="https://www.google.com"
+          href="https://developer.tbd.website/projects/web5/"
           target="_blank"
           rel="noopener noreferrer"
           className="custom_link"
         >
           <h3 className="link">What is Web5?</h3>
         </a>
-        <a
-          href="https://www.google.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="custom_link"
-        >
+        <button onClick={handleEmailClick} className="custom_button">
           <h3 className="link">Contact</h3>
-        </a>
+        </button>
       </div>
     </header>
   );

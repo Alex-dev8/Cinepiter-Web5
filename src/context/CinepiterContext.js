@@ -183,21 +183,35 @@ export const CinepiterProvider = ({ children }) => {
       favourite.genres.every((genreId) => _topGenres.includes(genreId))
     );
     let _recommendedMovies = [];
-    for (const favourite of filteredFavorites) {
-      const id = favourite.id.toString();
-      try {
-        const response = await axios.get(requests.fetchRecommendedMovies(id));
-        const data = response.data.results;
-        if (data.length > 0) {
-          _recommendedMovies = _recommendedMovies.concat(data);
+    await Promise.all(
+      filteredFavorites.map(async (favourite) => {
+        const id = favourite.id.toString();
+        try {
+          const response = await axios.get(requests.fetchRecommendedMovies(id));
+          const data = response.data.results;
+          if (data.length > 0) {
+            _recommendedMovies = _recommendedMovies.concat(data);
+          }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
+      })
+    );
+    const recommendedWithoutDuplicates = removeDuplicates(_recommendedMovies);
+    shuffleMovies(recommendedWithoutDuplicates);
+    const randomRecommendedMovies = recommendedWithoutDuplicates.splice(0, 25);
+    setRecommendedMovies(randomRecommendedMovies);
+  }
+
+  function removeDuplicates(array) {
+    const uniqueIds = new Set();
+    return array.filter((obj) => {
+      if (!uniqueIds.has(obj.id)) {
+        uniqueIds.add(obj.id);
+        return true;
       }
-      shuffleMovies(_recommendedMovies);
-      const randomRecommendedMovies = _recommendedMovies.splice(0, 25);
-      setRecommendedMovies(randomRecommendedMovies);
-    }
+      return false;
+    });
   }
 
   const value = {

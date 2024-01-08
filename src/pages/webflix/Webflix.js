@@ -1,10 +1,14 @@
 import "./Webflix.css";
 import Row from "../../components/webflix/Row";
 import requests from "../../requests";
+import { CinepiterContext } from "../../context/CinepiterContext";
+import { useContext } from "react";
 
 function Webflix() {
+  const { recommendedMovies } = useContext(CinepiterContext);
+
   return (
-    <div>
+    <div className="webflix_container">
       <div className="webflix_header_container">
         <img
           src={require("../../assets/webflix-logo.png")}
@@ -12,8 +16,9 @@ function Webflix() {
           className="webflix_header"
         />
       </div>
-
-      <Row title="RECOMMENDED FOR YOU" recommended />
+      {recommendedMovies.length && (
+        <Row title="RECOMMENDED FOR YOU" recommended />
+      )}
       <Row
         title="WEBFLIX ORIGINALS"
         fetchUrl={requests.fetchNetflixOriginalMovies}

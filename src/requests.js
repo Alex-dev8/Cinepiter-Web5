@@ -15,6 +15,11 @@ const requests = {
   fetchRecommendedMovies: (movie_id) => {
     return `/movie/${movie_id}/recommendations`;
   },
+  fetchAnimations: "/discover/movie?with_genres=16",
+  fetchFamily: "/discover/movie?with_genres=10751",
+  fetchFantasy: "/discover/movie?with_genres=14",
+  fetchMusic: "/discover/movie?with_genres=10402",
+  fetchKidsTV: "/discover/tv?with_genres=10762"
 };
 
 export default requests;
